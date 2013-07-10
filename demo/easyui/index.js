@@ -24,15 +24,13 @@ $(function() {
 
 	// 刷新
 	$("#m-refresh").click(function() {
-		debugger;
 		var currTab = $('#appTabs').tabs('getSelected'); // 获取选中的标签项
 		var url = $(currTab.panel('options').content).attr('src'); // 获取该选项卡中内容标签（iframe）的
-		// src 属性
-		/* 重新设置该标签 */
+		$(currTab.panel('options').content)[0].url = url;
 		$('#appTabs').tabs('update', {
 			tab : currTab,
 			options : {
-				content : createTabContent(url)
+				content : $(currTab.panel('options').content)[0]
 			}
 		})
 	});
