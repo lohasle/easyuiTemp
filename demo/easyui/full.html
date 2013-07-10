@@ -9,39 +9,55 @@
     <script type="text/javascript" src="../../js/easyui/jquery.easyui.min.js"></script>
     <script style="text/javascript">
         $(function(){
-            $("#accordion").accordion({
+            var screenHeight =$(window).height();
+            var screenWidth = $(window).width();
+            $("body").layout("collapse","south");
+            $("#appTabs").tabs({
                 fit:true
             });
+            $("#accordion").accordion({
+                fit:true,
+                width:"200px"
+            });
             $("a").click(function(){
-                $('#appTabs').tabs('add',{
-                    //id: tabId,
-                    title: "ssss",
-                   // iconCls: iconCls,
-                    content: "sassssssssssss",
-                    closable:true
-                });
+                var title  = $(this).html();
+                if(title!=""){
+                    if ($('#appTabs').tabs('exists', title)){
+                                       $('#appTabs').tabs('select',title);
+                                   }else{
+                                       $('#appTabs').tabs('add',{
+                                                           //id: tabId,
+                                                           title: title,
+                                                           content: "sassssssssssss",
+                                                           closable:true
+                                                       });
+                                   }
+                }
             });
         })
     </script>
 </head>
 <body class="easyui-layout">
-<div data-options="region:'north',border:false,split:true" style="background:#A9FACD;height: 60px; padding: 5px;">
-    welcome
-</div>
-<div data-options="region:'west',split:true,title:'菜单'" style="width:200px;padding:10px;">
+<div data-options="region:'north',border:false" style="height: 50px">
+    <div style="text-align: center">
+        欢迎 ${userName}!
+    </div>
 
-    <div  id="accordion">
-        <div title="Title1" iconCls="icon-save" style="overflow:auto;padding:10px;">
+</div>
+<div data-options="region:'west',split:true,title:'菜单'" style="width:200px;">
+
+    <div  id="accordion" >
+        <div title="Ipad销售模块" style="overflow:auto;padding:10px;">
            <a>
                content1
            </a>
         </div>
-        <div title="Title2" iconCls="icon-reload" selected="true" style="padding:10px;">
+        <div title="后台管理模块" selected="true" style="padding:10px;">
             <a>
             content2
             </a>
         </div>
-        <div title="Title3">
+        <div title="流程审批模块">
             <a>
             content3
              </a>
@@ -51,7 +67,9 @@
 </div>
 <div data-options="region:'east',split:true,collapsed:true,title:'East'" style="width:100px;padding:10px;">east region
 </div>
-<div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;padding:10px;">south region</div>
+<div data-options="region:'south',border:false,fit:true"  style="height:50px;padding:10px;">
+    <div style="text-align: center">江西汇锦技术</div>
+</div>
 <div data-options="region:'center'">
 
     <div id="appTabs" fit="true" border="false">
